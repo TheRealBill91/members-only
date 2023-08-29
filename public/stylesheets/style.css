@@ -4,5 +4,51 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: #00b7ff;
+  text-decoration: none;
+}
+
+.labelAndInput {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.signUpFormContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.signUpFormContainer input {
+  padding: 6px;
+  width: 50%;
+}
+
+.signUpFormContainer label::after {
+  content: " (Required)";
+  font-style: italic;
+}
+
+span.errorMsg {
+  color: rgb(121, 31, 31);
+}
+
+.signUpBtn,
+.loginBtn {
+  padding: 10px;
+  border: none;
+  color: rgb(78, 78, 78);
+  box-shadow: 2px 2px 2px rgba(155, 155, 155, 0.452);
+  border-radius: 10px 10px;
+  transition: color 0.1s linear;
+
+  & a {
+    color: inherit;
+  }
+}
+
+.signUpBtn:hover,
+.loginBtn:hover {
+  color: black;
 }
