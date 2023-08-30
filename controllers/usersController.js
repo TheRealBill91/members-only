@@ -24,7 +24,7 @@ exports.signup_post = [
     .escape(),
   body("email", "Email is required")
     .trim()
-    .isLength({min: 5})
+    .isLength({ min: 5 })
     .withMessage("Email not long enough")
     .isEmail()
     .withMessage("Please enter a valid email (test@example.com")
@@ -46,13 +46,11 @@ exports.signup_post = [
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
 
-    console.log(errors.isEmpty())
-
-    console.log(errors.array());
+    console.log("Errors array:" + errors.array());
 
     if (!errors.isEmpty()) {
       res.render("sign_up_form", {
-        title: "Sign Up",
+        pageTitle: "Sign Up",
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         email: req.body.email,
@@ -70,6 +68,7 @@ exports.signup_post = [
             last_name: req.body.last_name,
             email: req.body.email,
             password: hashedPassword,
+            membership_status: false,
           });
           await user.save();
           res.redirect("/");

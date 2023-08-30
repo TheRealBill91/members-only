@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/normalize.css" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title>Members Only</title>
+  </head>
+  <body>
+    <header>
+      <div class="headerContainer">
+        <h2>members only</h2>
+        <div>
+          <ul class="navLinksContainer">
+            <a href="/users/sign-up">
+              <li><button>sign up</button></li>
+            </a>
+            <% if (user) { %>
+            <a href="/logout">
+              <li><button>logout</button></li>
+            </a>
+            <% } else { %>
+            <a href="/login">
+              <li><button>login</button></li>
+            </a>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+    </header>
+  </body>
+</html>

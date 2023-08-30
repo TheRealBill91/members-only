@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/normalize.css" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title><%= pageTitle %></title>
+  </head>
+  <body class="bodyContainer">
+    <%- include('header') -%>
+    <main class="loginMainContainer">
+      <h1><%= pageTitle %></h1>
+
+      <form action="" method="POST">
+        <div class="messageFormContainer">
+          <div class="labelAndInput">
+            <label for="title">Title</label>
+            <input
+              value="<%= (typeof postTitle === 'undefined') ? '' : postTitle %>"
+              name="title"
+              id="title"
+            />
+            <% if (typeof errors !== 'undefined') { %> <%
+            errors.forEach(function(error) { %> <% if ((typeof error !==
+            'undefined') && error.path === 'title') { %>
+            <span class="errorMsg"><%= error.msg %></span>
+            <% } %> <% }); %> <% } %>
+          </div>
+
+          <div class="labelAndInput">
+            <label for="content">Message</label>
+            <textarea
+              name="content"
+              id="content"
+              type="textarea"
+              rows="10"
+              required
+            ><%= (typeof message === 'undefined') ? '' : message.content %></textarea>
+            <% if (typeof errors !== 'undefined') { %> <%
+            errors.forEach(function(error) { %> <% if ((typeof error !==
+            'undefined') && error.path === 'content') { %>
+            <span class="errorMsg"><%= error.msg %></span>
+            <% } %> <% }); %> <% } %>
+          </div>
+
+          <button class="signUpBtn" type="submit">Create</button>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>

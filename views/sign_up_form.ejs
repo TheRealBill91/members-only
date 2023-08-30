@@ -38,6 +38,11 @@
             type="text"
             required
           />
+          <% if (typeof errors !== 'undefined') { %> <%
+          errors.forEach(function(error) { %> <% if ((typeof error !==
+          'undefined') && error.path === 'last_name') { %>
+          <span class="errorMsg"><%= error.msg %></span>
+          <% } %> <% }); %> <% } %>
         </div>
 
         <div class="labelAndInput">
@@ -50,6 +55,11 @@
             type="email"
             required
           />
+          <% if (typeof errors !== 'undefined') { %> <%
+          errors.forEach(function(error) { %> <% if ((typeof error !==
+          'undefined') && error.path === 'email') { %>
+          <span class="errorMsg"><%= error.msg %></span>
+          <% } %> <% }); %> <% } %>
         </div>
 
         <div class="labelAndInput">
@@ -61,6 +71,11 @@
             type="password"
             required
           />
+          <% if (typeof errors !== 'undefined') { %> <%
+          errors.forEach(function(error) { %> <% if ((typeof error !==
+          'undefined') && error.path === 'password') { %>
+          <span class="errorMsg"><%= error.msg %></span>
+          <% } %> <% }); %> <% } %>
         </div>
 
         <div class="labelAndInput">
@@ -72,19 +87,14 @@
             type="password"
             required
           />
+          <% if (typeof errors !== 'undefined') { %> <%
+          errors.forEach(function(error) { %> <% if ((typeof error !==
+          'undefined') && error.path === 'confirm_password') { %>
+          <span class="errorMsg"><%= error.msg %></span>
+          <% } %> <% }); %> <% } %>
         </div>
 
-        <button
-          style="
-            width: 100px;
-            padding: 6px;
-            font-size: 1rem;
-            align-self: self-start;
-          "
-          type="submit"
-        >
-          Sign Up
-        </button>
+        <button class="signUpBtn" type="submit">Sign Up</button>
       </div>
     </form>
   </body>

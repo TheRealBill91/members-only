@@ -3,14 +3,20 @@ const express = require("express");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const passport = require("passport");
-var bcrypt = require("bcryptjs");
+const flash = require("connect-flash");
+const bcrypt = require("bcryptjs");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+
 const passportConfig = require("./controllers/passportController");
+const userInViews = require("./middleware/userInViews");
+const flashMessageInViews = require("./middleware/flashMessageInViews");
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
+const loginOutRouter = require("./routes/loginOut");
+const messageRouter = require("./routes/message");
 
 require("dotenv").config();
 
@@ -53,6 +59,7 @@ app.set("view engine", "ejs");
 
 app.use(logger("dev"));
 app.use(express.json());
+
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(
@@ -64,10 +71,16 @@ app.use(
     store: mongoStore,
   })
 );
+app.use(flash());
 passportConfig.passportInitialization(app);
+
+app.use(userInViews);
+app.use(flashMessageInViews);
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
+app.use("/", messageRouter);
+app.use("/", loginOutRouter);
 app.use("/users", usersRouter);
 
 // catch 404 and forward to error handler

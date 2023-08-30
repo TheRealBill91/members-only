@@ -4,14 +4,27 @@
     <title><%= title %></title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <button class="signUpBtn">
-      <a href="/users/sign-up">Sign up</a>
-    </button>
-    <button class="loginBtn">
-      <a href="/users/login">Login</a>
-    </button>
+
+  <body class="bodyContainer">
+    <%- include('header') -%>
+    <main class="mainContainer">
+      <div class="messageSuccess"><%= messageSuccess %></div>
+      <% if (user) { %>
+      <h2>Hi, <%= userInfo.first_name %></h2>
+      <p>Welcome to <%= title %></p>
+      <% } else { %>
+      <h2>Welcome</h2>
+      <% } %> <% if (user && userInfo.membership_status === true) { %>
+
+      <p>
+        Create your message
+        <a href="/createmessage">here</a>
+      </p>
+      <% } else if (user && !userInfo.membership_status === "true") { %>
+      <p>To create a message, <a>become a member</a></p>
+      <% } else { %>
+      <p>Sign Up and become a member to create a message</p>
+      <% } %>
+    </main>
   </body>
 </html>

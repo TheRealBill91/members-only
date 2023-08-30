@@ -1,6 +1,48 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+textarea {
+  resize: none;
+  margin: 0;
+}
+
+.messageFormContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  & input {
+
+  }
+
+  & input:focus, textarea:focus {
+    border: 1.5px solid black;
+  }
+}
+
+.bodyContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.mainContainer {
+  padding: 16px 26px;
+  flex: 1;
+}
+
+.loginMainContainer {
+  padding: 16px 26px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex: 1;
+
+  & .labelAndInput input {
+    width: 100%;
+  }
 }
 
 a {
@@ -14,15 +56,25 @@ a {
   gap: 6px;
 }
 
+.labelAndInput:last-of-type {
+  margin-bottom: 10px;
+}
+
 .signUpFormContainer {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-bottom: 12px;
 }
 
 .signUpFormContainer input {
   padding: 6px;
   width: 50%;
+  border: 1px solid rgb(76, 76, 76);
+}
+
+.signUpFormContainer input:focus {
+  border: 1.5px solid black;
 }
 
 .signUpFormContainer label::after {
@@ -37,18 +89,74 @@ span.errorMsg {
 .signUpBtn,
 .loginBtn {
   padding: 10px;
-  border: none;
   color: rgb(78, 78, 78);
-  box-shadow: 2px 2px 2px rgba(155, 155, 155, 0.452);
+  border: 1px solid rgb(78, 78, 78);
+  box-shadow: 2px 2px 2px rgba(155, 155, 155, 0.229);
   border-radius: 10px 10px;
-  transition: color 0.1s linear;
+  transition: color border 0.1s linear;
 
   & a {
     color: inherit;
   }
 }
 
+.signUpBtn {
+  width: 100px;
+  padding: 6px;
+  font-size: 1rem;
+  align-self: center;
+}
+
 .signUpBtn:hover,
 .loginBtn:hover {
   color: black;
+  border: 1px solid black;
+}
+
+header {
+}
+
+.headerContainer {
+  display: flex;
+  height: 100px;
+  color: white;
+  background-color: rgb(69, 69, 69);
+  align-items: center;
+  justify-content: space-between;
+  text-transform: capitalize;
+  padding: 0px 16px;
+
+  & h2 {
+    font-size: 1.4rem;
+  }
+}
+
+.navLinksContainer {
+  display: flex;
+  gap: 10px;
+  color: black;
+  font-size: 1.1rem;
+  list-style: none;
+
+  & button {
+    padding: 14px;
+    color: rgb(225, 225, 225);
+    border: 1px solid rgb(78, 78, 78);
+    border-radius: 10px 10px;
+    font-size: 1rem;
+    border: 1px solid rgb(134, 134, 134);
+    transition: color border 0.1s linear;
+    text-transform: capitalize;
+    white-space: nowrap;
+  }
+
+  & button:hover {
+    color: white;
+    border: 1px solid white;
+  }
+
+  & a {
+    text-decoration: none;
+    color: black;
+  }
 }
