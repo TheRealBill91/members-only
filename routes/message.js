@@ -16,4 +16,6 @@ router.post(
   messageController.create_message_post
 );
 
+router.get("/messages", messageController.message_list);
+
 module.exports = router;
