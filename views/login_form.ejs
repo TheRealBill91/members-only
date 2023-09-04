@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/stylesheets/style.css" />
     <title><%= pageTitle %></title>
   </head>
-  <body class="bodyContainer">
+  <body class="loginBodyContainer">
     <%- include('header') -%>
     <main class="loginMainContainer">
       <div class="loginBackgroundContainer">
@@ -50,7 +50,8 @@
             <button class="signUpBtn" type="submit">Login</button>
           </div>
         </form>
-        <% if (typeof messageFailure !== 'undefined') { %>
+        <% if (typeof messageFailure !== 'undefined' && messageFailure.length) {
+        %>
         <div class="messageFailure"><%= messageFailure %></div>
         <% } %>
       </div>

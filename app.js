@@ -8,6 +8,9 @@ const bcrypt = require("bcryptjs");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const helmet = require("helmet");
+const compression = require("compression");
+const favicon = require("serve-favicon");
 
 const passportConfig = require("./controllers/passportController");
 const userInViews = require("./middleware/userInViews");
@@ -22,7 +25,15 @@ require("dotenv").config();
 
 const app = express();
 
-const cookie = {};
+app.use(favicon(__dirname + "/favicon.ico"));
+
+app.use(compression()); // Compress all routes
+
+app.use(helmet());
+
+const cookie = {
+  httpOnly: true,
+};
 
 // security option for mongo store
 const crypto = {
@@ -42,7 +53,7 @@ const mongoDB = process.env.MONGODB_URI || process.env.DEV_DB_URI;
 
 const mongoStore = MongoStore.create({
   mongoUrl: mongoDB,
-  ttl: 7 * 24 * 60 * 60, // expires after 7 days,
+  ttl: 4 * 24 * 60 * 60, // expires after 4 days,
   touchAfter: 24 * 3600, // only update session once per 24 hours (besides session data changing)
   collectionName: "sessions",
   crypto: crypto,
@@ -64,6 +75,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(
   session({
+    name: "sessionId",
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,

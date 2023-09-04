@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/normalize.css" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title><%= pageTitle %></title>
+  </head>
+  <body class="bodyContainer">
+    <%- include('header') -%>
+    <main class="messageDeleteParentContainer">
+      <h1><%= title %></h1>
+      <div class="messageDeleteBackgroundForm">
+        <h3>Do you really want to delete this message?</h3>
+        <p>Author: <%= message.author.first_name %></p>
+        <p>Title: <%= message.title %></p>
+        <p>Message: <%= message.content %></p>
+
+        <form method="POST" action="">
+          <input
+            id="messageid"
+            class="form-control"
+            type="hidden"
+            name="messageid"
+            required="true"
+            value="<%= message._id  %>"
+          />
+
+          <button class="btn btn-primary" type="submit">Delete</button>
+        </form>
+        <% if (typeof messageFailure !== 'undefined' && messageFailure.length) {
+        %>
+        <div class="messageFailure"><%= messageFailure %></div>
+        <% } %>
+      </div>
+    </main>
+  </body>
+</html>

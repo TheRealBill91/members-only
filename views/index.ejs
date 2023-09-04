@@ -7,67 +7,86 @@
 
   <body class="bodyContainer">
     <%- include('header') -%>
-    <main class="mainContainer">
-      <% if (messageSuccess) { %>
-      <div class="messageSuccess"><%= messageSuccess %></div>
+    <main class="mainParentContainer">
+      <% if (user && userInfo.membership_status === true && userInfo.admin ===
+      false ) { %>
+      <p class="memberStatus">Member</p>
+      <% } %> <% if (user && userInfo.admin === true) { %>
+      <p class="memberStatus">Admin</p>
+      <% } %> <% if (user && userInfo.membership_status === false) { %>
+      <a href="/users/member_enrollment">
+        <button>Become a member</button>
+      </a>
+
       <% } %>
-      <div class="welcomeSection">
-        <% if (user) { %>
-        <h2>Hi, <%= userInfo.first_name %></h2>
-        <p>Welcome to <%= pageTitle %></p>
-        <% } else { %>
-        <h2>Welcome</h2>
-        <% } %> <% if (user && userInfo.membership_status === true) { %>
 
-        <p>
-          Create your message
-          <a href="/createmessage">here</a>
-        </p>
-        <% } else if (user && !userInfo.membership_status === true) { %>
-        <p>To create a message, <a>become a member</a></p>
-        <% } else { %>
-        <p>Sign Up and become a member to create a message</p>
+      <div class="mainContainer">
+        <% if (typeof messageSuccess !== 'undefined' && messageSuccess.length >
+        1) { %>
+        <div class="messageSuccess"><%= messageSuccess %></div>
         <% } %>
-      </div>
 
-      <ul class="postsContainer">
-        <% if (messages) { %> <% for (let i=0; i < messages.length; i++) { %>
-        <div class="singlePost">
-          <div class="dateAndAuthorContainer">
-            <% if (user && userInfo.membership_status === true) { %>
-            <div class="firstLastName">
-        
-              <p><strong><%= messages[i].author.first_name %></strong></p>
-              <% const lastNameInitial = messages[i].author.last_name.slice(0,
-              1) %>
-              <p><strong><%= lastNameInitial %></strong></p>
-             
-             
-             
-            </div>
-            <p class="dateAdded"><%= messages[i].formatted_date_stamp %></p>
-            <% } else { %>
+        <div class="welcomeSection">
+          <% if (user) { %>
+          <h2>Hi, <%= userInfo.first_name %></h2>
+
+          <p>Welcome to <%= pageTitle %></p>
+          <% } else { %>
+          <h2>Welcome</h2>
+          <% } %> <% if (user) { %>
+          <p>
+            Create your message
+            <a class="createmessage" href="/createmessage">here</a>
+          </p>
+          <% } else if (user && !userInfo.membership_status === true) { %>
+          <p>
+            To create a message,
+            <a href="/users/sign-up" class="signUp">sign up</a>
+          </p>
+          <% } %>
+        </div>
+
+        <ul class="postsContainer">
+          <% if (messages) { %> <% for (let i=0; i < messages.length; i++) { %>
+          <div class="singlePost">
+            <div class="dateAndAuthorContainer">
+              <% if (user && userInfo.membership_status === true) { %>
+              <div class="firstLastName">
+                <p><strong><%= messages[i].author.first_name %></strong></p>
+                <% const lastNameInitial = messages[i].author.last_name.slice(0,
+                1) %>
+                <p><strong><%= lastNameInitial %></strong></p>
+              </div>
+              <p class="dateAdded"><%= messages[i].formatted_date_stamp %></p>
+              <% } else { %>
               <div class="firstLastNameBlurred">
                 <p class="blurredFirstName">
                   <strong> first </strong>
                 </p>
-  
+
                 <p class="blurredLastName">
                   <strong>last</strong>
                 </p>
               </div>
               <p class="dateAddedBlurred">date</p>
+              <% } %>
+            </div>
+
+            <div class="userMessageBubble">
+              <p class="userMessage"><%- messages[i].content %></p>
+            </div>
+            <% if (user && userInfo.admin === true) { %>
+            <div class="deleteMessageContainer">
+              <p>
+                <a href="<%= messages[i].url+'/delete'   %>">Delete</a>
+              </p>
+            </div>
             <% } %>
-           
           </div>
 
-          <div class="userMessageBubble">
-            <p class="userMessage"><%= messages[i].content %></p>
-          </div>
-        </div>
-
-        <% } %> <% } %>
-      </ul>
+          <% } %> <% } %>
+        </ul>
+      </div>
     </main>
   </body>
 </html>

@@ -9,16 +9,13 @@
   </head>
   <body class="bodyContainer">
     <%- include('header') -%>
-    <main class="loginMainContainer">
-      <div class="loginBackgroundContainer">
-        <h1><%= title %></h1>
-
+    <main class="memberEnrollmentParentContainer">
+      <h1><%= title %></h1>
+      <div class="memberEnrollmentBackgroundForm">
         <form action="" method="POST">
-          <div class="loginFormContainer">
+          <div class="memberEnrollFormContainer">
             <div class="labelAndInput">
-              <label for="password"
-                >Enter the correct password to become a member today</label
-              >
+              <label for="password">Password</label>
               <input
                 value="<%= (typeof password === 'undefined') ? '' : password %>"
                 name="password"
@@ -33,10 +30,11 @@
               <% } %> <% }); %> <% } %>
             </div>
 
-            <button class="joinMembershipBtn" type="submit">Login</button>
+            <button class="joinMembershipBtn" type="submit">Enroll</button>
           </div>
         </form>
-        <% if (typeof messageFailure !== 'undefined') { %>
+        <% if (typeof messageFailure !== 'undefined' && messageFailure.length) {
+        %>
         <div class="messageFailure"><%= messageFailure %></div>
         <% } %>
       </div>

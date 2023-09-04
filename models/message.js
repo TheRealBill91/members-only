@@ -12,7 +12,7 @@ const MessageSchema = new Schema({
 
 // Virtual for message URL
 MessageSchema.virtual("url").get(function () {
-  return `/messages/message/${this._id}`;
+  return `/message/${this._id}`;
 });
 
 // Virtual for formatted date/time message creation
@@ -24,7 +24,5 @@ MessageSchema.virtual("formatted_date_stamp").get(function () {
   const dayAndMonth = formattedDate.slice(0, -6);
   return dayAndMonth;
 });
-
-
 
 module.exports = mongoose.model("Message", MessageSchema);
